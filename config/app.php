@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        taskSystem\Providers\AppServiceProvider::class,
+        taskSystem\Providers\AuthServiceProvider::class,
+        // taskSystem\Providers\BroadcastServiceProvider::class,
+        taskSystem\Providers\EventServiceProvider::class,
+        taskSystem\Providers\RouteServiceProvider::class,
 
     ],
 

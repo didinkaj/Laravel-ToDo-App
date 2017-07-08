@@ -11,9 +11,16 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name("main");
-Route::get('/minor', 'HomeController@minor')->name("minor");
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/','TaskAndFollowUp\TaskController@index')->name("tasks");
+//Route::get('/', 'Dashboard\DashboardController@index')->name("dashboard");
+Route::get('/home', 'Dashboard\DashboardController@index')->name("home");
+Route::get('/projects', 'Projects\ProjectsController@index')->name("projects");
+Route::get('/myprojects','MyProjects\MyProjectsController@index')->name("myprojects");
+Route::get('/issues','Issues\IssuesController@index')->name("issues");
+Route::get('/userboards','UserBoards\UserBoardsController@index')->name("userboards");
+Route::get('/tasks','TaskAndFollowUp\TaskController@index')->name("tasks");
+Route::get('/taskfollowupuserboards','TaskAndFollowUp\TaskFollowUpUserBoardsController@index')->name("taskfollowupuserboards");

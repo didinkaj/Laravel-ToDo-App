@@ -3,6 +3,6 @@
         Coding Challenge
     </div>
     <div>
-        <strong>Copyright</strong> Didinya Johnson &copy; 2017
+        <strong>Copyright</strong> &copy; Didinya Johnson  2017
     </div>
 </div>

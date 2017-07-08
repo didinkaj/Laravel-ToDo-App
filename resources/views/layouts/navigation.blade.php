@@ -14,11 +14,23 @@
 					TS
 				</div>
 			</li>
-			<li class="{{ isActiveRoute('main') }}">
-				<a href="{{ url('/') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+			<li class="{{ isActiveRoute('main') }}" >
+				<a href="{{ url('/') }}"><i class="fa fa-th-large fa-2x"></i> <br/><span class="nav-label">Dashboard</span></a>
 			</li>
-			<li class="{{ isActiveRoute('minor') }}">
-				<a href="{{ url('/minor') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Projects</span> </a>
+			<li class="{{ isActiveRoute('projects') }}">
+				<a href="#"><i class="fa fa-th-large fa-2x"></i> <span class="nav-label">Projects</span> </a>
+			</li>
+			<li class="{{ isActiveRoute('myProjects') }}">
+				<a href="#"><i class="fa fa-th-large fa-2x"></i> <span class="nav-label">My Projects</span> </a>
+			</li>
+			<li class="{{ isActiveRoute('issues') }}">
+				<a href="#"><i class="fa fa-th-large fa-2x"></i> <span class="nav-label">Issues</span> </a>
+			</li>
+			<li class="{{ isActiveRoute('userBoards') }}">
+				<a href="#"><i class="fa fa-th-large fa-2x"></i> <span class="nav-label">User Boards</span> </a>
+			</li>
+			<li class="{{ isActiveRoute('taskFollowUp') }}">
+				<a href="#"><i class="fa fa-th-large fa-2x"></i> <span class="nav-label">Task and Follow Up</span> </a>
 			</li>
 		</ul>
 

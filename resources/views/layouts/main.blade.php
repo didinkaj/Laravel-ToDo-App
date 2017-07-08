@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="{!! asset('css/main.css') !!}" />
 
 	</head>
-	<body>
+	<body class="skin-1 ">
 
 		<!-- Wrapper-->
 		<div id="wrapper">
@@ -34,10 +34,9 @@
 
 		</div>
 		<!-- End wrapper-->
-
-		<script src="{!! asset('js/app.js') !!}" type="text/javascript"></script>
-		<script src="{!! asset('js/apptheme.js') !!}" type="text/javascript"></script>
 		
+		
+		<script src="{!! asset('js/apptheme.js') !!}" type="text/javascript"></script>
 
 		@section('scripts')
 		@show

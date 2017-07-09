@@ -14,12 +14,12 @@
 		<div class="pull-right">
 		<ul class="nav navbar-top-links navbar-right">
 			<li>
-				<span class="m-r-sm text-muted welcome-message animated bounce"> Tasks Coordination, Management & Follow ups. </span>
+				<span class="m-r-sm text-muted welcome-message animated bounce" > Tasks Coordination, Management & Follow ups. </span>
 			</li>
 			<li>
 				<a href="{{ route('logout') }}" 
 				onclick="event.preventDefault();
-				document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out fa-1x"></i> Log out </a>
+				document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out fa-1x"></i> <strong>Log out </strong></a>
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 					{{ csrf_field() }}
 				</form>

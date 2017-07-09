@@ -9,7 +9,7 @@
                     <div class="col-lg-12">
                         <div class="text-center m-t-lg">
                             <h1 style="color: green;">
-                               The DashBoard
+                              The DashBoard
                             </h1>
                             <small>
                                <p>The tasks and follow up module will be part of the Project Management System </p> 

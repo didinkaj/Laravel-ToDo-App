@@ -36,8 +36,9 @@
 		<!-- End wrapper-->
 		
 		
-		<script src="{!! asset('js/apptheme.js') !!}" type="text/javascript"></script>
+		
 		<script src="{{ asset('js/app.js') }}"></script>
+		<script src="{!! asset('js/apptheme.js') !!}" type="text/javascript"></script>
 		@section('scripts')
 		@show
 

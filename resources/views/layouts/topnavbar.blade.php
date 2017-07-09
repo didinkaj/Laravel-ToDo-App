@@ -17,7 +17,7 @@
 				<span class="m-r-sm text-muted welcome-message animated bounce" > Tasks Coordination, Management & Follow ups. </span>
 			</li>
 			<li>
-				<a href="{{ route('logout') }}" 
+				<a href="{{ route('logout') }}" style="color: green;"
 				onclick="event.preventDefault();
 				document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out fa-1x"></i> <strong>Log out </strong></a>
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

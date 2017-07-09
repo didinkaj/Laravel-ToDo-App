@@ -17,6 +17,10 @@
                                	<p> if the tasks are completed in time</p> 
                             </small>
                         </div>
+                        <div id="app">
+                        	<example></example>
+                        	
+                        </div>
                     </div>
                 </div>
             </div>

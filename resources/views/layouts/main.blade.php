@@ -37,7 +37,7 @@
 		
 		
 		<script src="{!! asset('js/apptheme.js') !!}" type="text/javascript"></script>
-
+		<script src="{{ asset('js/app.js') }}"></script>
 		@section('scripts')
 		@show
 

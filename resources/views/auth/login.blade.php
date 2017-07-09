@@ -58,6 +58,9 @@
 					</form>
 				</div>
 			</div>
+			<div id="app">
+				<example></example>
+			</div>
 		</div>
 	</div>
 </div>

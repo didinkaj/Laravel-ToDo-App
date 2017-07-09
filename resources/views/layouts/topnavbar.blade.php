@@ -5,18 +5,19 @@
 			<form role="search" class="navbar-form-custom" method="post" action="/">
 				<div class="form-group">
 					<div class="input-group">
-						<input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search" />
+						<input type="text" placeholder="Search ..." class="form-control" name="top-search" id="top-search" />
 
 					</div>
 				</div>
 			</form>
 		</div>
+		<div class="pull-right">
 		<ul class="nav navbar-top-links navbar-right">
 			<li>
-				<span class="m-r-sm text-muted welcome-message"> Tasks Coordination, management & follow ups.| </span>
+				<span class="m-r-sm text-muted welcome-message animated bounce"> Tasks Coordination, Management & Follow ups. </span>
 			</li>
 			<li>
-				<a href="{{ route('logout') }}"
+				<a href="{{ route('logout') }}" 
 				onclick="event.preventDefault();
 				document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out fa-1x"></i> Log out </a>
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -25,5 +26,6 @@
 			</li>
 
 		</ul>
+		</div>
 	</nav>
 </div>

@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center m-t-lg">
-                            <h1>
+                            <h1 style="color: green;">
                                The DashBoard
                             </h1>
                             <small>

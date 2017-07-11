@@ -15,7 +15,7 @@
 		<h1 style="color: green;"> Project Management </h1>
 		<ol class="breadcrumb">
 			<li>
-				<a>Task & Follow Up</a>
+				<a href="/tasks">Task & Follow Up</a>
 			</li>
 			<li class="active">
 				<a>Tasks</a>
@@ -33,12 +33,11 @@
 </div>
 @if(!empty(Session::get('error')) && Session::get('error') == 5)
 <script>
+	$(document).ready(function() {
 
-$(document).ready(function(){
+		$('#myModal').modal('show');
 
-    $('#myModal').modal('show');
-  
-});
+	}); 
 </script>
 @endif
 
@@ -48,7 +47,13 @@ $(document).ready(function(){
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
+					@isset($allTasks)
 					<h5>All Tasks </h5>
+					@endisset
+
+					@isset($taskByID)
+					<h5> Tasks Details</h5>
+					@endisset
 
 					<div class="ibox-tools">
 						<a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
@@ -64,17 +69,27 @@ $(document).ready(function(){
 						<a class="close-link"> <i class="fa fa-times"></i> </a>
 					</div>
 				</div>
+
 				<div class="ibox-content">
+					@if (Session::has('success'))
+					<span class="alert alert-success alert-dismissable col-md-12"> <strong>{{ Session::get('success') }}</strong>
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">
+							×
+						</button></span>
+					@endif
+					@if (Session::has('error'))
+					<span class="alert alert-danger alert-dismissable col-md-12"> <strong>{{ Session::get('error') }}</strong>
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">
+							×
+						</button></span>
+					@endif
+
+					@isset($allTasks)
 					<div class="input-group m-b placeholodercolor">
 						<input type="text" class="form-control input-sm m-b-xs " id="filter" placeholder="Search in table">
 						<span class="input-group-addon btn-success"><i class="fa fa-search " style="color: #0E9AEF;"></i></span>
 					</div>
-					@if (Session::has('success'))
-					<span class="alert alert-success alert-dismissable col-md-12"> <strong>{{ Session::get('success') }}</strong> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></span>
-					@endif
-					@if (Session::has('error'))
-					<span class="alert alert-danger alert-dismissable col-md-12"> <strong>{{ Session::get('error') }}</strong> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></span>
-					@endif
+
 					<table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
 						<thead>
 							<tr>
@@ -92,7 +107,7 @@ $(document).ready(function(){
 							</tr>
 						</thead>
 						<tbody>
-							@isset($allTasks)
+
 							@foreach($allTasks as $task)
 							<tr class="gradeX">
 								<td class="center">{{$task->id}}</td>
@@ -111,32 +126,6 @@ $(document).ready(function(){
 								<td class="center"><a  href="/tasks/{{$task->id}}" class="btn  " style="background-color: green;color: #ffffff;"><i class="fa fa-folder-open"></i> More</a></td>
 							</tr>
 							@endforeach
-							@endisset
-
-							@isset($taskByID)
-							@foreach($taskByID as $task)
-							<tr class="gradeX">
-								<td class="center">{{$task->id}}</td>
-								<td>{{$task->body}} </td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-								<form method="POST" action="/deletetasks/{{$task->id}}">
-									{{ csrf_field() }}
-									{{ method_field('delete') }}
-									<button type="submit"   class="btn  " style="background-color: red;color: #ffffff;">
-										<i class="fa fa-trash-o"></i>
-									</button>
-								</form></td>
-							</tr>
-							@endforeach
-							@endisset
 
 						</tbody>
 						<tfoot>
@@ -145,6 +134,216 @@ $(document).ready(function(){
 							</tr>
 						</tfoot>
 					</table>
+					@endisset
+
+					@isset($taskByID)
+					@foreach($taskByID as $task)
+
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="m-b-md">
+								<form method="POST" action="/deletetasks/{{$task->id}}" class="pull-right">
+									{{ csrf_field() }}
+									{{ method_field('delete') }}
+									<button type="submit"   class="btn  " style="background-color: red;color: #ffffff;">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</form>
+								<!--<a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>-->
+								<h2>{{$task->body}}</h2>
+							</div>
+							<dl class="dl-horizontal">
+								<dt>
+									Status:
+								</dt>
+								<dd>
+									<span class="label label" style="color: #ffffff;background-color: green;">Active</span>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-5">
+							<dl class="dl-horizontal">
+
+								<dt>
+									Created by:
+								</dt>
+								<dd>
+									{{Auth::user()->name}}
+								</dd>
+								<dt>
+									Department:
+								</dt>
+								<dd>
+
+								</dd>
+								<dt>
+									Priority:
+								</dt>
+								<dd>
+									<a href="#" class="text-navy"> High</a>
+								</dd>
+								<dt>
+									Task Id:
+								</dt>
+								<dd>
+									{{$task->id}}
+								</dd>
+							</dl>
+						</div>
+						<div class="col-lg-7" id="cluster_info">
+							<dl class="dl-horizontal">
+
+								<dt>
+									Last Updated:
+								</dt>
+								<dd>
+									{{$task->updated_at->diffForHumans()}}
+								</dd>
+								<dt>
+									Created:
+								</dt>
+								<dd>
+									{{$task->created_at->diffForHumans()}}
+								</dd>
+								<dt>
+									Participants:
+								</dt>
+								<dd class="project-people">
+									<a href=""><i class="fa fa-user"></i></a>
+									<a href=""><i class="fa fa-user"></i></a>
+									<a href=""><i class="fa fa-user"></i></a>
+									<a href=""><i class="fa fa-user"></i></a>
+									<a href=""><i class="fa fa-user"></i></a>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<dl class="dl-horizontal">
+								<dt>
+									Completed:
+								</dt>
+								<dd>
+									<div class="progress progress-striped active m-b-sm" >
+										<div style="width: 50%;" style="color: #ffffff;background-color: green;" class="progress-bar"></div>
+									</div>
+									<small>Project completed in <strong>50%</strong>. Remaining close the project</small>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										<ul class="nav nav-tabs">
+											<li class="">
+												<a href="#tab-1" data-toggle="tab" aria-expanded="false">Participants Comments</a>
+											</li>
+											<li class="active">
+												<a href="#tab-2" data-toggle="tab" aria-expanded="true">Last activity</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="panel-body">
+
+									<div class="tab-content">
+										<div class="tab-pane" id="tab-1">
+											<div class="feed-activity-list">
+												<div class="feed-element">
+													<a href="#" class="pull-left"> <i class="fa fa-image"></i> </a>
+													<div class="media-body ">
+														<small class="pull-right">{{$task->created_at->diffForHumans()}}</small>
+														<strong>Mark Johnson</strong> posted message on <strong>{{Auth::user()->name}}</strong> project.
+														<br>
+														<small class="text-muted">{{$task->created_at}} - {{$task->updated_at}}</small>
+														<div class="well">
+															{{$task->body}}
+														</div>
+													</div>
+												</div>
+												<div class="feed-element">
+													<a href="#" class="pull-left"> <i class="fa fa-image"></i> </a>
+													<div class="media-body ">
+														<small class="pull-right">2h ago</small>
+														<strong>{{$task->name}}</strong> add 1 photo on <strong>{{$task->name}}</strong>project.
+														<br>
+														<small class="text-muted">{{$task->created_at->diffForHumans()}} </small>
+													</div>
+												</div>
+												
+
+											</div>
+
+										</div>
+										<div class="tab-pane active" id="tab-2">
+
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Status</th>
+														<th>Title</th>
+														<th>Start Time</th>
+														<th>End Time</th>
+														<th>Comments</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><span class="label " style="color: #ffffff;background-color: green;" ><i class="fa fa-check"></i> Completed</span></td>
+														<td> {{$task->body}} </td>
+														<td> {{$task->created_at}}</td>
+														<td> {{$task->updated_at}}</td>
+														<td>
+														<p class="small">
+															{{$task->body}}
+														</p></td>
+
+													</tr>
+
+													<tr>
+														<td><span class="label " style="color: #ffffff;background-color: green;" ><i class="fa fa-check"></i> Completed</span></td>
+														<td> {{$task->body}} </td>
+														<td> {{$task->created_at}}</td>
+														<td> {{$task->updated_at}}</td>
+														<td>
+														<p class="small">
+															{{$task->body}}
+														</p></td>
+
+													</tr>
+													<tr>
+														<td><span class="label " style="color: #ffffff;background-color: green;" ><i class="fa fa-check"></i> Completed</span></td>
+														<td> {{$task->body}} </td>
+														<td> {{$task->created_at}}</td>
+														<td> {{$task->updated_at}}</td>
+														<td>
+														<p class="small">
+															{{$task->body}}
+														</p></td>
+
+													</tr>
+
+												</tbody>
+											</table>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					@endforeach
+					@endisset
 				</div>
 			</div>
 		</div>

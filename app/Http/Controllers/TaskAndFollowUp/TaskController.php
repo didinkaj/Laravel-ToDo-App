@@ -56,6 +56,7 @@ class TaskController extends Controller {
         ]);
 
         if ($validator->fails()) {
+        	session::flash('error', 'Task Creation failed, please try again');
             return redirect('/tasks')
                         ->withErrors($validator)
                         ->withInput();
@@ -63,7 +64,7 @@ class TaskController extends Controller {
         	$save =Task::create(['body' => $request->input(['body'])]);
 			// redirect
 			if($save){
-            session::flash('success', 'Successfully created task!');
+            session::flash('success', 'Task Created Successfully ');
             return redirect('/tasks');
 			}else{
 			session::flash('error', 'Error Task not saved, try again!');

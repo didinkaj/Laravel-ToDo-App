@@ -26,11 +26,22 @@
 	</div>
 	<div class="col-lg-2">
 		<h1></h1>
-		<a class="minimalize-styl-2 btn btn-success " data-toggle="modal" data-target="#myModal" href="#"> <i class="fa fa-suitcase"></i>
+		<a class="minimalize-styl-2 btn btn-success " id="task" data-toggle="modal" data-target="#myModal" href="#"> <i class="fa fa-suitcase"></i>
 		<br/>
 		Create Task</a>
 	</div>
 </div>
+@if(!empty(Session::get('error')) && Session::get('error') == 5)
+<script>
+
+$(document).ready(function(){
+
+    $('#myModal').modal('show');
+  
+});
+</script>
+@endif
+
 <div class="wrapper wrapper-content animated fadeInRight" id="app">
 
 	<div class="row">
@@ -58,7 +69,12 @@
 						<input type="text" class="form-control input-sm m-b-xs " id="filter" placeholder="Search in table">
 						<span class="input-group-addon btn-success"><i class="fa fa-search " style="color: #0E9AEF;"></i></span>
 					</div>
-
+					@if (Session::has('success'))
+					<span class="alert alert-success alert-dismissable col-md-12"> <strong>{{ Session::get('success') }}</strong> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></span>
+					@endif
+					@if (Session::has('error'))
+					<span class="alert alert-danger alert-dismissable col-md-12"> <strong>{{ Session::get('error') }}</strong> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></span>
+					@endif
 					<table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
 						<thead>
 							<tr>
@@ -115,7 +131,8 @@
 									{{ csrf_field() }}
 									{{ method_field('delete') }}
 									<button type="submit"   class="btn  " style="background-color: red;color: #ffffff;">
-									<i class="fa fa-trash-o"></i></button>
+										<i class="fa fa-trash-o"></i>
+									</button>
 								</form></td>
 							</tr>
 							@endforeach
@@ -171,6 +188,8 @@
 	</div>
 </div>
 <!-- end of modal window -->
+<!--modol erro -->
+
 @endsection
 
 @section('scripts')

@@ -26,7 +26,7 @@ Route::get('/userboards','UserBoards\UserBoardsController@index')->name("userboa
 Route::get('/tasks','TaskAndFollowUp\TaskController@index')->name("tasks");
 Route::post('/createtasks','TaskAndFollowUp\TaskController@store')->name("tasks");
 Route::get('tasks/{id}', ['uses' =>'TaskAndFollowUp\TaskController@show'])->where('id', '[0-9]+')->name("tasks");
-
+Route::delete('deletetasks/{id}', ['uses' =>'TaskAndFollowUp\TaskController@destroy'])->where('id', '[0-9]+')->name("tasks");
 
 
 Route::get('/taskfollowupuserboards','TaskAndFollowUp\TaskFollowUpUserBoardsController@index')->name("taskfollowupuserboards");

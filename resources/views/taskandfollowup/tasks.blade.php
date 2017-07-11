@@ -22,7 +22,7 @@
 			</li>
 
 		</ol>
-		
+
 	</div>
 	<div class="col-lg-2">
 		<h1></h1>
@@ -110,7 +110,13 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
+								<td>
+								<form method="POST" action="/deletetasks/{{$task->id}}">
+									{{ csrf_field() }}
+									{{ method_field('delete') }}
+									<button type="submit"   class="btn  " style="background-color: red;color: #ffffff;">
+									<i class="fa fa-trash-o"></i></button>
+								</form></td>
 							</tr>
 							@endforeach
 							@endisset

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use taskSystem\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use taskSystem\Task;
+use Session;
+
 
 class TaskController extends Controller {
 	/**
@@ -38,7 +40,7 @@ class TaskController extends Controller {
 	 */
 	public function create() {
 		//
-		 return view('/taskandfollowup/tasks');
+		 return view('taskandfollowup.tasks');
 	}
 
 	/**
@@ -49,13 +51,28 @@ class TaskController extends Controller {
 	 */
 	public function store(Request $request) {
 		//
-		$this->validate($request, [
-		        'body' => 'required|max:255',
-		    ]);
-			
+		   $validator = Validator::make($request->all(), [
+            'body' => 'required|max:255|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/tasks')
+                        ->withErrors($validator)
+                        ->withInput();
+        }else{
+        	$save =Task::create(['body' => $request->input(['body'])]);
+			// redirect
+			if($save){
+            session::flash('success', 'Successfully created task!');
+            return redirect('/tasks');
+			}else{
+			session::flash('error', 'Error Task not saved, try again!');
+            return redirect('/tasks');
+			}
+        }
 		
-			
-		}
+	
+	}
 
 	/**
 	 * Display the specified resource.
@@ -99,6 +116,14 @@ class TaskController extends Controller {
 	 */
 	public function destroy($id) {
 		//
+		$delete = Task::destroy($id);
+		if($delete){
+			session::flash('success', 'Successfully deleted task!');
+            return redirect('/tasks');
+		}else{
+			session::flash('error', 'Deletion failed, please try again');
+            return redirect('/tasks');
+		}
 	}
 
 }

@@ -19,7 +19,7 @@
 				display: flex;
 				align-items: center;
 			}
-			
+
 		</style>
 	</head>
 	<body>
@@ -50,12 +50,15 @@
 						<ul class="nav navbar-nav navbar-right">
 							<!-- Authentication Links -->
 							@if (Auth::guest())
+
 							<li>
-								<a href="{{ route('login') }}">Login</a>
+								<a href="{{ route('register') }}"><span style="color: green" class="glyphicon glyphicon-user"></span> Sign Up</a>
 							</li>
 							<li>
-								<a href="{{ route('register') }}">Register</a>
+								<a href="{{ route('login') }}"><span style="color: green" class="glyphicon glyphicon-log-in"></span> Login</a>
 							</li>
+							
+
 							@else
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{ Auth::user()->name }} <span class="caret"></span> </a>

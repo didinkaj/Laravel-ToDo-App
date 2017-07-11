@@ -50,7 +50,7 @@ class TaskController extends Controller {
 	public function store(Request $request) {
 		//
 		$this->validate($request, [
-		        'body' => 'required|max:2',
+		        'body' => 'required|max:255',
 		    ]);
 			
 		

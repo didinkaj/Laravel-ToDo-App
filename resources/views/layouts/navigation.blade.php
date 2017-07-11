@@ -22,7 +22,7 @@
 				</div>
 			</li>
 			<li class="{{ isActiveRoute('dashboard') }} {{ isActiveRoute('home') }}" >
-				<a href="{{ url('/home') }}" class="text-center"><i class="fa fa-desktop fa-2x"></i>
+				<a href="{{ url('/dash') }}" class="text-center"><i class="fa fa-desktop fa-2x"></i>
 				<br/>
 				<span class="nav-label">Dashboard</span></a>
 			</li>

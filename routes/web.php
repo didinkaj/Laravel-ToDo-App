@@ -17,7 +17,8 @@ Auth::routes();
 
 Route::get('/','TaskAndFollowUp\TaskController@index')->name("tasks");
 //Route::get('/', 'Dashboard\DashboardController@index')->name("dashboard");
-Route::get('/home', 'Dashboard\DashboardController@index')->name("home");
+Route::get('/home', 'TaskAndFollowUp\TaskController@index')->name("tasks");
+Route::get('/dash', 'Dashboard\DashboardController@index')->name("home");
 Route::get('/projects', 'Projects\ProjectsController@index')->name("projects");
 Route::get('/myprojects','MyProjects\MyProjectsController@index')->name("myprojects");
 Route::get('/issues','Issues\IssuesController@index')->name("issues");

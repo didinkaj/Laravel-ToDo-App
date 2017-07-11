@@ -9,9 +9,11 @@
 
 		<link rel="stylesheet" href="{!! asset('css/vendor.css') !!}" />
 		<link rel="stylesheet" href="{!! asset('css/main.css') !!}" />
+		@section('styles')
+		@show
 
 	</head>
-	<body class="skin-1 ">
+	<body class="skin-1 " >
 
 		<!-- Wrapper-->
 		<div id="wrapper">

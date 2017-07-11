@@ -5,7 +5,7 @@ namespace taskSystem\Http\Controllers\TaskAndFollowUp;
 use Illuminate\Http\Request;
 
 use taskSystem\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Validator;
 use taskSystem\Task;
 
 class TaskController extends Controller {
@@ -38,6 +38,7 @@ class TaskController extends Controller {
 	 */
 	public function create() {
 		//
+		 return view('/taskandfollowup/tasks');
 	}
 
 	/**
@@ -48,7 +49,13 @@ class TaskController extends Controller {
 	 */
 	public function store(Request $request) {
 		//
-	}
+		$this->validate($request, [
+		        'body' => 'required|max:2',
+		    ]);
+			
+		
+			
+		}
 
 	/**
 	 * Display the specified resource.

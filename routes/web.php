@@ -23,6 +23,7 @@ Route::get('/myprojects','MyProjects\MyProjectsController@index')->name("myproje
 Route::get('/issues','Issues\IssuesController@index')->name("issues");
 Route::get('/userboards','UserBoards\UserBoardsController@index')->name("userboards");
 Route::get('/tasks','TaskAndFollowUp\TaskController@index')->name("tasks");
+Route::post('/createtasks','TaskAndFollowUp\TaskController@store')->name("tasks");
 Route::get('tasks/{id}', ['uses' =>'TaskAndFollowUp\TaskController@show'])->where('id', '[0-9]+')->name("tasks");
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Projects page')
+@section('title', 'Projects ')
 
 @section('styles')
 

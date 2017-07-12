@@ -1,9 +1,9 @@
 <?php
 
 namespace taskSystem\Http\Controllers\TaskAndFollowUp;
-
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-
+use Auth;
 use taskSystem\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use taskSystem\Task;
@@ -53,6 +53,7 @@ class TaskController extends Controller {
 		//
 		   $validator = Validator::make($request->all(), [
             'body' => 'required|max:255|string',
+            'department' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -61,7 +62,13 @@ class TaskController extends Controller {
                         ->withErrors($validator)
                         ->withInput();
         }else{
-        	$save =Task::create(['body' => $request->input(['body'])]);
+        	$save =Task::create([
+        				'body' => $request->input(['body']),
+        				 'user_id'=>Auth::user()->id,
+        				 'email'=>Auth::user()->email,
+        				 'department' => $request->input(['department']),
+        				 'access' => $request->input(['access'])
+        				]);
 			// redirect
 			if($save){
             session::flash('success', 'Task Created Successfully ');

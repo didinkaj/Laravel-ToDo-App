@@ -7,6 +7,7 @@
 @parent
 <!-- FooTable -->
 <link href="{!! asset('css/plugins/footable/footable.core.css') !!}" rel="stylesheet">
+<link href="{!! asset('css/plugins/select2/select2.min.css') !!}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -112,7 +113,7 @@
 							<tr class="gradeX">
 								<td class="center">{{$task->id}}</td>
 								<td>{{ucfirst($task->body)}} </td>
-								<td></td>
+								<td>{{ucfirst($task->access)}}</td>
 								<td></td>
 								<td class="center"><span class="pie" style="display: none;">4,9</span>
 								<svg class="peity" height="16" width="16">
@@ -142,15 +143,17 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="m-b-md">
+
 								<form method="POST" action="/deletetasks/{{$task->id}}" class="pull-right">
 									{{ csrf_field() }}
 									{{ method_field('delete') }}
 									<button type="submit"   class="btn  " style="background-color: red;color: #ffffff;">
 										<i class="fa fa-trash-o"></i>
 									</button>
-								</form>
+								</form>&nbsp;&nbsp;
+
 								<!--<a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>-->
-								<h2>{{$task->body}}</h2>
+								<h2 style="float: left;">{{$task->body}}</h2>
 							</div>
 							<dl class="dl-horizontal">
 								<dt>
@@ -176,7 +179,7 @@
 									Department:
 								</dt>
 								<dd>
-
+									{{$task->department}}
 								</dd>
 								<dt>
 									Priority:
@@ -260,7 +263,7 @@
 													<a href="#" class="pull-left"> <i class="fa fa-image"></i> </a>
 													<div class="media-body ">
 														<small class="pull-right">{{$task->created_at->diffForHumans()}}</small>
-														<strong>Mark Johnson</strong> posted message on <strong>{{Auth::user()->name}}</strong> project.
+														<strong>{{Auth::user()->name}}</strong> posted message on <strong>{{Auth::user()->name}}</strong> project.
 														<br>
 														<small class="text-muted">{{$task->created_at}} - {{$task->updated_at}}</small>
 														<div class="well">
@@ -272,12 +275,11 @@
 													<a href="#" class="pull-left"> <i class="fa fa-image"></i> </a>
 													<div class="media-body ">
 														<small class="pull-right">2h ago</small>
-														<strong>{{$task->name}}</strong> add 1 photo on <strong>{{$task->name}}</strong>project.
+														<strong>{{Auth::user()->name}}</strong> add 1 photo on <strong>{{$task->name}}</strong>project.
 														<br>
 														<small class="text-muted">{{$task->created_at->diffForHumans()}} </small>
 													</div>
 												</div>
-												
 
 											</div>
 
@@ -369,9 +371,36 @@
 					{{ csrf_field() }}
 					<div class="form-group {{ $errors->has('body') ? ' has-error' : '' }}">
 						<label for="body">Task Name</label>
-						<input type="text" placeholder="Enter task name" name="body" class="form-control">
+						<input type="text" placeholder="Enter task name" name="body" value="{{old('body')}}" class="form-control">
 						@if ($errors->has('body'))
 						<span class="help-block"> <strong>{{ $errors->first('body') }}</strong> </span>
+						@endif
+					</div>
+
+					<div class="form-group {{ $errors->has('department') ? ' has-error' : '' }}">
+						<label for="department">Department</label>
+
+						<select class=" form-control" name="department" required>
+							<option></option>
+							<option value="Finance" {{ (old("department") == "Finance" ? "selected":"") }}>Finance</option>
+							<option value="IT" {{ (old("department") == "IT" ? "selected":"") }}>IT</option>
+							<option value="Research" {{ (old("department") == "Research" ? "selected":"") }}>Research</option>
+						</select>
+						@if ($errors->has('department'))
+						<span class="help-block"> <strong>{{ $errors->first('department') }}</strong> </span>
+						@endif
+					</div>
+					<div class="form-group {{ $errors->has('access') ? ' has-error' : '' }}">
+						<label for="access">Access</label>
+
+						<select class=" form-control" name="access" required>
+							<option></option>
+							<option value="All" {{ (old("access") == "All" ? "selected":"") }}>All</option>
+							<option value="Private" {{ (old("access") == "Private" ? "selected":"") }}>Private</option>
+							<option value="Public" {{ (old("access") == "Public" ? "selected":"") }}>Public</option>
+						</select>
+						@if ($errors->has('access'))
+						<span class="help-block"> <strong>{{ $errors->first('access') }}</strong> </span>
 						@endif
 					</div>
 
@@ -396,6 +425,8 @@
 @parent
 <!-- FooTable -->
 <script src="{{ asset('js/plugins/footable/footable.all.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('js/plugins/select2/select2.full.min.js') }}"></script>
 <!-- Page-Level Scripts -->
 <script>
 	$(document).ready(function() {
@@ -403,6 +434,12 @@
 		$('.footable').footable();
 		$('.footable2').footable();
 
+	});
+	$(".select2_demo_1").select2();
+	$(".select2_demo_2").select2();
+	$(".select2_demo_3").select2({
+		placeholder : "Select a state",
+		allowClear : true
 	});
 
 </script>

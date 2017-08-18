@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="row wrapper white-bg border-bottom page-heading">
-	<div class="col-lg-10">
+	<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 		<h1 style="color: green;"> Project Management </h1>
 		<ol class="breadcrumb">
 			<li>
@@ -25,7 +25,7 @@
 		</ol>
 
 	</div>
-	<div class="col-lg-2">
+	<div class="col-xs-10 col-sm-10 col-md-10 col-lg-2">
 		<h1></h1>
 		<a class="minimalize-styl-2 btn btn-success " id="task" data-toggle="modal" data-target="#myModal" href="#"> <i class="fa fa-suitcase"></i>
 		<br/>
@@ -145,8 +145,8 @@
 							<div class="m-b-md">
 
 								<form method="POST" action="/deletetasks/{{$task->id}}" class="pull-right">
-									{{ csrf_field() }}
-									{{ method_field('delete') }}
+									{!! csrf_field() !!}
+									{!! method_field('delete') !!}
 									<button type="submit"   class="btn  " style="background-color: red;color: #ffffff;">
 										<i class="fa fa-trash-o"></i>
 									</button>
